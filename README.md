@@ -1,5 +1,4 @@
-<<<<<<< HEAD
-# Nivara2
-=======
-# Nivara
->>>>>>> d8f049e (Initial commit)
+# README.md
+
+Local version of README  
+Remote version of README
