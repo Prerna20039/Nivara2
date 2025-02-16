@@ -1,9 +1,13 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: [],
+  content: ["./src/**/*.{js,jsx,ts,tsx}"],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        inder: ["Inder", "sans-serif"],
+        fell: ["IM FELL Double Pica", "serif"], // Add Inder font
+      },
+    },
   },
   plugins: [],
-}
-
+};

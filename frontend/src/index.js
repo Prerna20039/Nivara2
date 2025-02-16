@@ -3,7 +3,12 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+<<<<<<< HEAD
 import "bootstrap/dist/css/bootstrap.min.css";
+=======
+import "@fontsource/inder"; // Import Inder font
+
+>>>>>>> 2a1098c940adc8e14466bb1be17be154be8ed913
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(

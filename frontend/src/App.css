@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 @import url('https://fonts.googleapis.com/css2?family=Inder&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Inder&family=Julius+Sans+One&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=IM+Fell+Double+Pica&display=swap');
@@ -15,9 +16,15 @@ html {
 }
 
 /* header and Preheader */
+=======
+
+
+>>>>>>> 2a1098c940adc8e14466bb1be17be154be8ed913
 .App {
   text-align: center;
 }
+
+
 
 .App-logo {
   height: 40vmin;
