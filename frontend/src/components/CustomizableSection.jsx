@@ -10,7 +10,7 @@ const customizableProducts = [
 
 export default function CustomizableSection() {
   return (
-    <div className="max-w-[80%] mx-auto px-4 py-12">
+    <div className="max-w-[80%] mx-auto px-4 pt-12">
       {/* Heading */}
       <h2 className="text-3xl md:text-4xl font-fell font-extralight text-[#4D6E3D] mb-8 text-center">
         Customizables
