@@ -1,25 +1,5 @@
-<<<<<<< HEAD
-@import url('https://fonts.googleapis.com/css2?family=Inder&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Inder&family=Julius+Sans+One&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=IM+Fell+Double+Pica&display=swap');
-
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  
-}
-body,
-html {
-  width: 100%;
-  height: 100%;
-}
-
-/* header and Preheader */
-=======
 
 
->>>>>>> 2a1098c940adc8e14466bb1be17be154be8ed913
 .App {
   text-align: center;
 }
@@ -72,9 +52,10 @@ html {
 }
 .logo h2{
   font-family: "Julius Sans One", serif;
+  font-size: 25px;
 }
 .logo img {
-  width: 50px;
+  width: 60%;
   object-fit: cover;
   margin-right: 0.5em;
   margin-left: 1em;
@@ -87,8 +68,8 @@ html {
   border-radius: 2em;
   cursor: pointer;
   transition: all 0.5s ease;
-
-  width: 100px;
+  width : 120px;
+  height: 55px;
 }
 .search-head button:hover {
   background-color: #2C4F1D;
@@ -178,7 +159,7 @@ nav ul li a:hover::after {
   justify-content: space-between;
   padding: 80px; 
   height: 78vh; 
-  background: linear-gradient(to right, #f5f5f5, #e1e5d6);
+  background: #D4E9BD;
   margin-top: -20px;
 }
 
@@ -219,6 +200,7 @@ nav ul li a:hover::after {
   font-family: "Inder", serif;
   margin-top: 28px;
   box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.3);
+  height: 60px;
 }
 
 .hero-button:hover {
@@ -232,11 +214,11 @@ nav ul li a:hover::after {
 .curved-box {
   background-color: #f4f4f4;
   padding: 40px;
-  border-radius: 50px 0px 50px 0px; /* Curved top-left and bottom-right */
+  border-radius: 50px 20px 50px 20px; /* Curved top-left and bottom-right */
   width: 350px; /* Decreased width */
   height: 450px; /* Increased height */
   position: absolute;
-  right: 50px;
+  right: 1%;
   top: 61%;
   transform: translateY(-50%);
   box-shadow: 8px 8px 20px rgba(0, 0, 0, 0.3);
@@ -247,6 +229,8 @@ nav ul li a:hover::after {
   transform: translate(-60%, -50%);
   background-color: #2C4F1D;
   overflow: hidden;
+  margin-top: 60px;
+
 }
 
 /*.curved-box img {

@@ -18,7 +18,7 @@ export default function Footer() {
           </div>
   
           {/* Middle Section - Quick Links */}
-          <div className="ml-60">
+          <div className="ml-40">
             <h3 className="text-lg font-semibold mb-4 ">QUICK LINKS</h3>
             <ul className="space-y-2 text-sm">
               <li><a href="#" className="hover:underline">HOME</a></li>

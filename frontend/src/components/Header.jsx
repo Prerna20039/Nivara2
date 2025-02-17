@@ -5,8 +5,7 @@ const Header = () => {
     <header>
       <div className="search-head">
         <div className="logo">
-          <img src="./logo.png" alt="" />
-          <h2>NIVARA</h2>
+          <img src="/images/logo.svg" alt="" />
         </div>
         <div className="search">
           <input
