@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 @import url('https://fonts.googleapis.com/css2?family=Inder&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Inder&family=Julius+Sans+One&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=IM+Fell+Double+Pica&display=swap');
@@ -16,10 +16,7 @@ html {
 }
 
 /* header and Preheader */
-=======
 
-
->>>>>>> 2a1098c940adc8e14466bb1be17be154be8ed913
 .App {
   text-align: center;
 }
@@ -149,6 +146,7 @@ nav ul li a:hover::after {
   display: flex;
   justify-content: space-between;
 }
+
 .preheader {
   text-align: center;
   color: white;
@@ -156,8 +154,9 @@ nav ul li a:hover::after {
   font-family: "Inder", serif;
   font-weight: 300;
   color: #C9C8BE;
-  font-size: 1em;
+  font-size: 1.3em;
 }
+
 .App-link {
   color: #61dafb;
 }
@@ -178,7 +177,7 @@ nav ul li a:hover::after {
   justify-content: space-between;
   padding: 80px; 
   height: 78vh; 
-  background: linear-gradient(to right, #f5f5f5, #e1e5d6);
+  background: #D4E9BD;
   margin-top: -20px;
 }
 
@@ -232,7 +231,7 @@ nav ul li a:hover::after {
 .curved-box {
   background-color: #f4f4f4;
   padding: 40px;
-  border-radius: 50px 0px 50px 0px; /* Curved top-left and bottom-right */
+  border-radius: 50px 40px 50px 40px; /* Curved top-left and bottom-right */
   width: 350px; /* Decreased width */
   height: 450px; /* Increased height */
   position: absolute;
@@ -285,4 +284,53 @@ nav ul li a:hover::after {
 .indicator.active {
   background-color: #4CAF50;
   transform: scale(1.3); /* Slightly bigger when active */
+}
+
+/*ShopV*/
+.shopv-container {
+  position: absolute;
+  top: 170px; /* Adjust to move card further down */
+  left: 50%;
+  transform: translateX(-50%);
+  width: 75%; /* Increased width */
+  background: #D5E3CE;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 16px;
+  padding: 30px;
+  z-index: 10;
+}
+
+.shopv-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* 3 columns */
+  gap: 30px;
+  align-items: start;
+}
+
+.shopv-category {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start; /* Align everything to the left */
+}
+
+.shopv-category h5 {
+  font-size: 0.1em;
+  margin-bottom: 10px;
+  color: #000000;
+  font-family: "Inder", sans-serif;
+  padding-left: 10px; 
+}
+
+.shopv-category ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.shopv-category ul li {
+  font-size: 1.4em;
+  color: #000000;
+  font-family: "Inter", sans-serif;
+  padding-left: 10px; /* Matches h4 alignment */
+  letter-spacing: 2%;
 }
