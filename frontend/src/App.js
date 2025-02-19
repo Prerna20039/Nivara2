@@ -1,14 +1,14 @@
 import React from "react";
 import ProductCard from "./components/productcard";
-import TopBanner from "./components/TopBanner";
+import "./App.css";
+import Header from "./components/Header";
+import Hero from "./components/Hero";
 import ExclusiveOfferCarousel from "./components/exculsiveOffer";
 import CustomizableSection from "./components/CustomizableSection";
 import FeedbackCorner from "./components/feedback";
 import Footer from "./components/footer";
-import Header from "./components/Header";
 import PreHeader from "./components/PreHeader";
-import Hero from "./components/Hero";
-import './App.css'
+
 
 export default function App() {
   const products = [
@@ -37,10 +37,11 @@ export default function App() {
 
   return (
     <div className="overflow-hidden">
-      {/* Top Banner */}
-      <TopBanner />
-      <div className="mt-12"><Header /></div>
-      <div className="mt-12"><Hero /></div>
+      <PreHeader/>
+       <Header/>
+      <Hero/>
+      
+      
 
       {/* Best Selling Products Section */}
       <section className="max-w-6xl mx-auto mt-12 px-4 lg:px-20">

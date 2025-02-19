@@ -1,4 +1,21 @@
 
+@import url('https://fonts.googleapis.com/css2?family=Inder&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inder&family=Julius+Sans+One&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=IM+Fell+Double+Pica&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  
+}
+body,
+html {
+  width: 100%;
+  height: 100%;
+}
+
+/* header and Preheader */
 
 .App {
   text-align: center;
@@ -130,6 +147,7 @@ nav ul li a:hover::after {
   display: flex;
   justify-content: space-between;
 }
+
 .preheader {
   text-align: center;
   color: white;
@@ -137,8 +155,9 @@ nav ul li a:hover::after {
   font-family: "Inder", serif;
   font-weight: 300;
   color: #C9C8BE;
-  font-size: 1em;
+  font-size: 1.3em;
 }
+
 .App-link {
   color: #61dafb;
 }
