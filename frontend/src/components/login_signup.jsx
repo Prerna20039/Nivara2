@@ -6,6 +6,20 @@ export function LoginSignupPopup({ isOpen, onClose }) {
   const [isLogin, setIsLogin] = useState(true);
   const [showPassword, setShowPassword] = useState(false);
 
+  const [loginInfo,setLoginInfo] = useState({
+    name : '',
+    email : '',
+    password : ''
+  });
+
+  const handleChange = (e) =>{
+    const {name,value} = e.target;
+    console.log(name,value);
+    const copyLoginInfo = {...loginInfo};
+    copyLoginInfo[name] = value;
+    setLoginInfo(copyLoginInfo);
+  }
+  console.log('loginInfo -> ',loginInfo);
   if (!isOpen) return null;
 
   return (
@@ -25,11 +39,12 @@ export function LoginSignupPopup({ isOpen, onClose }) {
         </h2>
 
         {/* Form */}
-        <form>
+        <form autoComplete="off">
           {/* Email */}
           <div className="mb-3">
             <label className="text-sm font-medium text-gray-700">Email Address*</label>
             <input
+              onChange={handleChange}
               type="email"
               className="w-full p-2 border border-gray-300 rounded-md"
               required
@@ -41,6 +56,7 @@ export function LoginSignupPopup({ isOpen, onClose }) {
             <div className="mb-3">
               <label className="text-sm font-medium text-gray-700">First Name*</label>
               <input
+                onChange={handleChange}
                 type="text"
                 className="w-full p-2 border border-gray-300 rounded-md"
                 required
@@ -52,6 +68,7 @@ export function LoginSignupPopup({ isOpen, onClose }) {
           <div className="mb-4 relative">
             <label className="text-sm font-medium text-gray-700">Password*</label>
             <input
+              onChange={handleChange}
               type={showPassword ? "text" : "password"}
               className="w-full p-2 border border-gray-300 rounded-md"
               required

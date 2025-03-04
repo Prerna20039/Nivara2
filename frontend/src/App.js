@@ -40,7 +40,7 @@ export default function App() {
       {/* Top Banner */}
       <TopBanner />
       <div className="mt-12"><Header /></div>
-      <div className="mt-12"><Hero /></div>
+      <div className="mt-7"><Hero /></div>
 
       {/* Best Selling Products Section */}
       <section className="max-w-6xl mx-auto mt-12 px-4 lg:px-20">
