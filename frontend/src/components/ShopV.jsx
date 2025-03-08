@@ -1,51 +1,39 @@
 import React from "react";
-
+import { useNavigate } from "react-router-dom";
 
 const ShopV = () => {
+  const navigate = useNavigate();
+
+  const handleCategoryClick = (category) => {
+    navigate(`/category/${category}`);
+  };
+
   return (
     <div className="shopv-container">
       <div className="shopv-card">
         <div className="shopv-grid">
-          <div className="category">
-            <h5>Handmade or Crafts Business</h5>
-            <ul>
-              <li>Paintings</li>
-              <li>Resin Art</li>
-              <li>Art Prints</li>
-            </ul>
-          </div>
-          <div className="category">
-            <h5>For Fashion & Accessories</h5>
-            <ul>
-              <li>Clothing</li>
-              <li>Jewelry & Accessories</li>
-              <li>Bags & Wallets</li>
-            </ul>
-          </div>
-          <div className="category">
-            <h5>Customizables</h5>
-            <ul>
-              <li>---</li>
-              <li>---</li>
-              <li>---</li>
-            </ul>
-          </div>
-          <div className="category">
-            <h5>Occasions or Themes</h5>
-            <ul>
-              <li>Seasonal Collections</li>
-              <li>Festive Specials</li>
-              <li>Birthday Gifts</li>
-            </ul>
-          </div>
-          <div className="category">
-            <h5>Small Business Specials</h5>
-            <ul>
-              <li>Eco Friendly Products</li>
-              <li>Limited Editions</li>
-              <li>Support local Artisans</li>
-            </ul>
-          </div>
+          {[
+            { title: "Handmade or Crafts Business", items: ["Paintings", "Resin Art", "Art Prints"] },
+            { title: "For Fashion & Accessories", items: ["Clothing", "Jewelry & Accessories", "Bags & Wallets"] },
+            { title: "Customizables", items: ["---", "---", "---"] },
+            { title: "Occasions or Themes", items: ["Seasonal Collections", "Festive Specials", "Birthday Gifts"] },
+            { title: "Small Business Specials", items: ["Eco Friendly Products", "Limited Editions", "Support local Artisans"] },
+          ].map((category, index) => (
+            <div key={index} className="category">
+              <h5 className="font-semibold text-gray-800">{category.title}</h5>
+              <ul>
+                {category.items.map((item, idx) => (
+                  <li 
+                    key={idx} 
+                    onClick={() => handleCategoryClick(item)}
+                    className="cursor-pointer text-gray-700 hover:text-black transition duration-200"
+                  >
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
         </div>
       </div>
     </div>

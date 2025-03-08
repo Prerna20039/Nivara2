@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import ShopV from "./ShopV";
 
 const Header = () => {
@@ -14,7 +15,7 @@ const Header = () => {
       <header>
         <div className="search-head">
           <div className="logo">
-            <img src="./logo.png" alt="Logo" />
+            <img src="/logo.png" alt="Logo" />
             <h2>NIVARA</h2>
           </div>
           <div className="search">
@@ -36,7 +37,9 @@ const Header = () => {
 
           <div className="icons">
             <i className="fa-regular fa-heart"></i>
-            <i className="fa-solid fa-cart-shopping"></i>
+            <Link to="/cart">
+              <i className="fa-solid fa-cart-shopping"></i>
+            </Link>
             <i className="fa-regular fa-user"></i>
           </div>
         </nav>
