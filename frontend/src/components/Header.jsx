@@ -3,11 +3,30 @@ import React, { useState } from "react";
 import ShopV from "./nav_popup";
 import { LoginSignupPopup } from "./login_signup";
 import { AccountMenuPopup } from "./profilepopup";
+import { LoginPopup } from "./loginpopup";
+import { SignupPopup } from "./signup";
 
 const Header = () => {
   const [showShopV, setShowShopV] = useState(false);
   const [isPopupOpen, setPopupOpen] = useState(false);
   const [isAccountMenuOpen, setIsAccountMenuOpen] = useState(false);
+  const [showLogin, setShowLogin] = useState(false)
+  const [showSignup, setShowSignup] = useState(false)
+
+  const openLogin = () => {
+    setShowLogin(true)
+    setShowSignup(false)
+  }
+
+  const openSignup = () => {
+    setShowSignup(true)
+    setShowLogin(false)
+  }
+
+  const closeAll = () => {
+    setShowLogin(false)
+    setShowSignup(false)
+  }
 
   const toggleShopV = (e) => {
     e.preventDefault();
@@ -15,9 +34,9 @@ const Header = () => {
   };
 
   return (
-    <header>
+    <header >
       {/* Search Head */}
-      <div className="search-head">
+      <div className="search-head ">
         <div className="logo">
           <img src="/images/logo.svg" alt="Nivara Logo" />
         </div>
@@ -29,11 +48,11 @@ const Header = () => {
           />
           <i className="fa-solid fa-magnifying-glass searchlogo"></i>
         </div>
-        <button  onClick={() => setPopupOpen(true)}
+        <button  onClick={openLogin}
         className="bg-[#A7B65D] text-white px-4 py-2 rounded-md hover:bg-[#8C9E4B]">Log In</button>
       </div>
-      <LoginSignupPopup isOpen={isPopupOpen} onClose={() => setPopupOpen(false)} />
-      {/* Navigation Menu */}
+      <LoginPopup isOpen={showLogin} onClose={closeAll} onSwitchToSignup={openSignup} />
+      <SignupPopup isOpen={showSignup} onClose={closeAll} onSwitchToLogin={openLogin} />{/* Navigation Menu */}
       <nav>
         <ul>
           <li>

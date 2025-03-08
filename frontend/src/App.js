@@ -8,6 +8,8 @@ import CustomizableSection from "./components/CustomizableSection";
 import FeedbackCorner from "./components/feedback";
 import Footer from "./components/footer";
 import PreHeader from "./components/PreHeader";
+import TopBanner from "./components/TopBanner";
+
 
 
 export default function App() {
@@ -37,11 +39,11 @@ export default function App() {
 
   return (
     <div className="overflow-hidden">
-      <PreHeader/>
-       <Header/>
-      <Hero/>
+      <TopBanner />
+    
       
-      
+      <div className="mt-12"><Header /></div>
+      <div className="mt-7"><Hero /></div>
 
       {/* Best Selling Products Section */}
       <section className="max-w-6xl mx-auto mt-12 px-4 lg:px-20">
