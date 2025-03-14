@@ -1,4 +1,5 @@
 import React from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import ProductCard from "./components/productcard";
 import "./App.css";
 import Header from "./components/Header";
@@ -9,8 +10,13 @@ import FeedbackCorner from "./components/feedback";
 import Footer from "./components/footer";
 import PreHeader from "./components/PreHeader";
 import TopBanner from "./components/TopBanner";
-import Home from "./components/can";
-
+import EmptyCartPage from "./components/EmptyCartPage";
+import ShopV from "./components/ShopV";
+import CategoryPage from "./components/CategoryPage";
+import AccountSettings from "./pages/Sell_your_products/page";
+import Create_seller_account from "./pages/Create_seller_account/page";
+import CreateShop from "./pages/shop_registeration/page";
+import SellerDashboard from "./pages/seller_Dashboard/page";
 
 export default function App() {
   const products = [
@@ -38,44 +44,65 @@ export default function App() {
   ];
 
   return (
-    <div className="overflow-hidden">
-      <Home />
-      
-      
-      {/* <TopBanner />
+    <>
      
-    
+
+      <Routes>
+        {/* Home Route */}
+        <Route
+          path="/"
+          element={
+            <div className="overflow-hidden">
+              <TopBanner />
+              <div className="mt-12"><Header /></div>
+              <div className="mt-4"><Hero /></div>
+
+
+              <section className="max-w-6xl mx-auto mt-12 px-4 lg:px-20">
+                <h1 className="text-[40px] text-[#4D6E3D] font-normal text-center mb-8">
+                  Best Selling Products
+                </h1>
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+                  {products.map((product, index) => (
+                    <ProductCard key={index} {...product} />
+                  ))}
+                </div>
+
+                <div className="w-[224px] h-[65px] border-2 border-[#2C4F1D] rounded-3xl text-[#2C4F1D] p-4 text-[25px] flex items-center justify-center gap-2 mx-auto my-20 cursor-pointer hover:bg-[#2C4F1D] hover:text-white transition duration-300">
+                  See More
+                  <img src="/images/right_arrow.svg" className="w-6 h-6" alt="Arrow" />
+                </div>
+              </section>
+
+              <ExclusiveOfferCarousel />
+              <CustomizableSection />
+              <FeedbackCorner />
+              <Footer />
+            </div>
+          }
+        />
+
+        {/* Cart Page */}
+        <Route path="/cart" element={<div> <TopBanner />
+          <div className="mt-9"><Header /> <TopBanner />
+      <div className="mt-9"><Header /></div> <EmptyCartPage /> <Footer /> </div></div>} />
+
+        {/* Shop Categories Page */}
+        <Route path="/shop" element={<ShopV />} />
+
+        {/* Category Page (When a category is clicked) */}
+        <Route path="/category/:categoryName" element={<CategoryPage />} />
+        <Route path="/sell" element={<Create_seller_account />} />
+        <Route path="/settings" element={<div><TopBanner />
+        <div className="mt-9"><Header /></div><AccountSettings /> <Footer /> </div>} />
+        <Route path="/shop_register" element={<CreateShop />} />
+        <Route path="/seller_dashboard" element={<SellerDashboard />} />
+  
+
+
+      </Routes>
       
-      <div className="mt-12"><Header /></div>
-      <div className="mt-7"><Hero /></div>
-
-     
-      <section className="max-w-6xl mx-auto mt-12 px-4 lg:px-20">
-        <h1 className="text-[40px] text-[#4D6E3D] font-normal text-center mb-8">
-          Best Selling Products
-        </h1>
-
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-          {products.map((product, index) => (
-            <ProductCard key={index} {...product} />
-          ))}
-        </div>
-
-        
-        <div className="w-[224px] h-[65px] border-2 border-[#2C4F1D] rounded-3xl text-[#2C4F1D] p-4 text-[25px] flex items-center justify-center gap-2 mx-auto my-20 cursor-pointer hover:bg-[#2C4F1D] hover:text-white transition duration-300">
-          See More
-          <img src="/images/right_arrow.svg" className="w-6 h-6" alt="Arrow" />
-        </div>
-      </section>
-
-   
-      <div className="mt-20">
-        <ExclusiveOfferCarousel />
-      </div>
-
-      <CustomizableSection />
-      <FeedbackCorner />
-      <Footer /> */}
-    </div>
+      </>
   );
 }

@@ -1,32 +1,30 @@
 import React, { useState } from "react";
-// Ensure the correct path
+import { Link } from "react-router-dom";
 import ShopV from "./nav_popup";
-import { LoginSignupPopup } from "./login_signup";
-import { AccountMenuPopup } from "./profilepopup";
 import { LoginPopup } from "./loginpopup";
 import { SignupPopup } from "./signup";
+import { AccountMenuPopup } from "./profilepopup";
 
 const Header = () => {
   const [showShopV, setShowShopV] = useState(false);
-  const [isPopupOpen, setPopupOpen] = useState(false);
   const [isAccountMenuOpen, setIsAccountMenuOpen] = useState(false);
-  const [showLogin, setShowLogin] = useState(false)
-  const [showSignup, setShowSignup] = useState(false)
+  const [showLogin, setShowLogin] = useState(false);
+  const [showSignup, setShowSignup] = useState(false);
 
   const openLogin = () => {
-    setShowLogin(true)
-    setShowSignup(false)
-  }
+    setShowLogin(true);
+    setShowSignup(false);
+  };
 
   const openSignup = () => {
-    setShowSignup(true)
-    setShowLogin(false)
-  }
+    setShowSignup(true);
+    setShowLogin(false);
+  };
 
   const closeAll = () => {
-    setShowLogin(false)
-    setShowSignup(false)
-  }
+    setShowLogin(false);
+    setShowSignup(false);
+  };
 
   const toggleShopV = (e) => {
     e.preventDefault();
@@ -34,9 +32,9 @@ const Header = () => {
   };
 
   return (
-    <header >
+    <header>
       {/* Search Head */}
-      <div className="search-head ">
+      <div className="search-head">
         <div className="logo">
           <img src="/images/logo.svg" alt="Nivara Logo" />
         </div>
@@ -48,43 +46,48 @@ const Header = () => {
           />
           <i className="fa-solid fa-magnifying-glass searchlogo"></i>
         </div>
-        <button  onClick={openLogin}
-        className="bg-[#A7B65D] text-white px-4 py-2 rounded-md hover:bg-[#8C9E4B]">Log In</button>
+        <button onClick={openLogin} className="bg-[#A7B65D] text-white px-4 py-2 rounded-md hover:bg-[#8C9E4B]">
+          Log In
+        </button>
       </div>
+
+      {/* Login & Signup Popups */}
       <LoginPopup isOpen={showLogin} onClose={closeAll} onSwitchToSignup={openSignup} />
-      <SignupPopup isOpen={showSignup} onClose={closeAll} onSwitchToLogin={openLogin} />{/* Navigation Menu */}
+      <SignupPopup isOpen={showSignup} onClose={closeAll} onSwitchToLogin={openLogin} />
+
+      {/* Navigation Menu */}
       <nav>
         <ul>
           <li>
-            <a href="#" className="hover:text-gray-300">HOME</a>
+            <Link to="/" className="hover:text-gray-300">HOME</Link>
           </li>
-
-          {/* SHOP with Popup on Hover */}
           <li className="relative">
-              <a href="#" onClick={toggleShopV}>SHOP V</a> 
+            <button onClick={toggleShopV} className="hover:text-gray-300">SHOP V</button>
           </li>
           <li>
-            <a href="#" className="hover:text-gray-300">CONTACT</a>
+            <Link to="/contact" className="hover:text-gray-300">CONTACT</Link>
           </li>
           <li>
-            <a href="#" className="hover:text-gray-300">ABOUT US</a>
+            <Link to="/about" className="hover:text-gray-300">ABOUT US</Link>
           </li>
         </ul>
 
         {/* Icons */}
         <div className="icons">
           <i className="fa-regular fa-heart"></i>
-          <i className="fa-solid fa-cart-shopping"></i>
-          <i className="fa-regular fa-user"  onClick={() => setIsAccountMenuOpen(!isAccountMenuOpen)}></i>
+          <Link to="/cart">
+            <i className="fa-solid fa-cart-shopping"></i>
+          </Link>
+          <i className="fa-regular fa-user" onClick={() => setIsAccountMenuOpen(!isAccountMenuOpen)}></i>
         </div>
-        <AccountMenuPopup
-        isOpen={isAccountMenuOpen}
-        onClose={() => setIsAccountMenuOpen(false)}
-      />
+
+        {/* Account Menu Popup */}
+        <AccountMenuPopup isOpen={isAccountMenuOpen} onClose={() => setIsAccountMenuOpen(false)} />
       </nav>
+
+      {/* Show ShopV component below the navbar if toggled */}
       {showShopV && <ShopV />}
     </header>
-  
   );
 };
 
