@@ -1,222 +1,228 @@
-import React, { useState } from 'react';
+"use client"
 
-const AddProductPopup = ({ onClose, onSave }) => {
+import { useState, useEffect } from "react"
+import { Upload, X } from "lucide-react"
+
+const AddProductPopup = ({ isOpen, onClose, onSubmit, editProduct }) => {
   const [formData, setFormData] = useState({
-    category: '',
-    productName: '',
-    productDescription: '',
-    productFeature: '',
-    productPrice: '',
-    stock: '',
-    photos: []
-  });
+    category: "",
+    name: "",
+    description: "",
+    price: "",
+    stock: "",
+    photos: [],
+  })
 
-  const [descriptionLength, setDescriptionLength] = useState(0);
-  const [featureLength, setFeatureLength] = useState(0);
+  const [dragActive, setDragActive] = useState(false)
 
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    
-    if (name === 'productDescription') {
-      setDescriptionLength(value.length);
-    } else if (name === 'productFeature') {
-      setFeatureLength(value.length);
-    }
-    
-    setFormData({
-      ...formData,
-      [name]: value
-    });
-  };
-
-  const handleFileChange = (e) => {
-    if (e.target.files && formData.photos.length < 3) {
-      const newPhotos = [...formData.photos];
-      for (let i = 0; i < e.target.files.length; i++) {
-        if (newPhotos.length < 3) {
-          newPhotos.push(e.target.files[i]);
-        }
-      }
+  useEffect(() => {
+    if (editProduct) {
       setFormData({
-        ...formData,
-        photos: newPhotos
-      });
+        category: editProduct.category || "",
+        name: editProduct.name || "",
+        description: editProduct.description || "",
+        price: editProduct.price ? editProduct.price.toString() : "",
+        stock: editProduct.stock ? editProduct.stock.toString() : "",
+        photos: editProduct.photos || [],
+      })
+    } else {
+      setFormData({
+        category: "",
+        name: "",
+        description: "",
+        price: "",
+        stock: "",
+        photos: [],
+      })
     }
-  };
+  }, [editProduct, isOpen])
+
+  const handleChange = (e) => {
+    const { name, value } = e.target
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value,
+    }))
+  }
+
+  const handleDrag = (e) => {
+    e.preventDefault()
+    e.stopPropagation()
+    setDragActive(e.type === "dragenter" || e.type === "dragover")
+  }
 
   const handleDrop = (e) => {
-    e.preventDefault();
-    if (e.dataTransfer.files && formData.photos.length < 3) {
-      const newPhotos = [...formData.photos];
-      for (let i = 0; i < e.dataTransfer.files.length; i++) {
-        if (newPhotos.length < 3) {
-          newPhotos.push(e.dataTransfer.files[i]);
-        }
-      }
-      setFormData({
-        ...formData,
-        photos: newPhotos
-      });
-    }
-  };
+    e.preventDefault()
+    e.stopPropagation()
+    setDragActive(false)
 
-  const handleDragOver = (e) => {
-    e.preventDefault();
-  };
+    if (e.dataTransfer.files && e.dataTransfer.files[0]) {
+      handleFiles(e.dataTransfer.files)
+    }
+  }
+
+  const handleFiles = (files) => {
+    if (formData.photos.length + files.length > 3) {
+      alert("You can only upload up to 3 photos")
+      return
+    }
+
+    const newFiles = Array.from(files).map((file) => URL.createObjectURL(file))
+    setFormData((prev) => ({
+      ...prev,
+      photos: [...prev.photos, ...newFiles].slice(0, 3),
+    }))
+  }
 
   const handleSubmit = (e) => {
-    e.preventDefault();
-    onSave(formData);
-  };
+    e.preventDefault()
+    onSubmit(formData)
+    onClose()
+  }
+
+  // Close popup when clicking outside the modal
+  const handleBackgroundClick = (e) => {
+    if (e.target.id === "modal-background") {
+      onClose()
+    }
+  }
+
+  if (!isOpen) return null
+
+  const categories = ["Birthday Gifts", "Jewelry", "Home Decor", "Accessories", "Art"]
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-      <div className="bg-white rounded-lg w-full max-w-2xl mx-4 p-6 relative">
-        <h2 className="text-2xl font-medium text-center mb-6">Add a Product</h2>
-        
-        {/* User Avatar - Top Right */}
-        <div className="absolute top-6 right-6">
-          <div className="w-10 h-10 rounded-full bg-gray-300 overflow-hidden">
-            <img src="/api/placeholder/40/40" alt="User avatar" className="w-full h-full object-cover" />
-          </div>
-        </div>
-        
-        <form onSubmit={handleSubmit}>
-          {/* Category Dropdown */}
-          <div className="mb-4">
+    <div
+      id="modal-background"
+      className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50"
+      onClick={handleBackgroundClick}
+      aria-hidden={!isOpen}
+    >
+      <div className="bg-white rounded-lg p-8 w-full max-w-xl max-h-[90vh] overflow-y-auto relative">
+        {/* Close Button */}
+        <button onClick={onClose} className="absolute top-4 right-4 text-gray-500 hover:text-gray-700">
+          <X size={24} />
+        </button>
+
+        <h2 className="text-2xl font-semibold mb-6 text-center">{editProduct ? "Edit Product" : "Add a Product"}</h2>
+
+        <form onSubmit={handleSubmit} className="space-y-6">
+          <div>
             <select
               name="category"
               value={formData.category}
-              onChange={handleInputChange}
-              className="w-full border border-gray-300 rounded-full px-4 py-2 focus:outline-none focus:ring-2 focus:ring-green-500"
+              onChange={handleChange}
+              className="w-full p-3 border border-gray-300 rounded-md"
               required
             >
-              <option value="" disabled>Select a Category</option>
-              <option value="jewelry">Jewelry</option>
-              <option value="clothing">Clothing</option>
-              <option value="accessories">Accessories</option>
-              <option value="handmade">Handmade</option>
-              <option value="birthday">Birthday Gifts</option>
+              <option value="">Select a Category</option>
+              {categories.map((category) => (
+                <option key={category} value={category}>
+                  {category}
+                </option>
+              ))}
             </select>
           </div>
-          
-          {/* Product Name */}
-          <div className="mb-4">
-            <label className="block text-gray-600 text-sm mb-1">Product Name</label>
+
+          <div>
             <input
               type="text"
-              name="productName"
-              value={formData.productName}
-              onChange={handleInputChange}
-              className="w-full border border-gray-300 rounded-full px-4 py-2 focus:outline-none focus:ring-2 focus:ring-green-500"
+              name="name"
+              placeholder="Product Name"
+              value={formData.name}
+              onChange={handleChange}
+              className="w-full p-3 border border-gray-300 rounded-md"
               required
             />
           </div>
-          
-          {/* Product Description */}
-          <div className="mb-4">
-            <label className="block text-gray-600 text-sm mb-1">Product Description</label>
-            <div className="relative">
-              <textarea
-                name="productDescription"
-                value={formData.productDescription}
-                onChange={handleInputChange}
-                className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-green-500"
-                rows="4"
-                maxLength="500"
-                required
-              ></textarea>
-              <div className="absolute bottom-2 right-3 text-xs text-gray-500">
-                {descriptionLength}/500
-              </div>
-            </div>
+
+          <div className="relative">
+            <textarea
+              name="description"
+              placeholder="Product Description"
+              value={formData.description}
+              onChange={handleChange}
+              maxLength={500}
+              rows={4}
+              className="w-full p-3 border border-gray-300 rounded-md"
+              required
+            />
+            <span className="absolute bottom-2 right-2 text-sm text-gray-500">{formData.description.length}/500</span>
           </div>
-          
-          {/* Product Feature */}
-          <div className="mb-4">
-            <label className="block text-gray-600 text-sm mb-1">Product Feature</label>
-            <div className="relative">
-              <textarea
-                name="productFeature"
-                value={formData.productFeature}
-                onChange={handleInputChange}
-                className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-green-500"
-                rows="3"
-                maxLength="250"
-              ></textarea>
-              <div className="absolute bottom-2 right-3 text-xs text-gray-500">
-                {featureLength}/250
-              </div>
-            </div>
-          </div>
-          
-          {/* Product Price */}
-          <div className="mb-4">
-            <label className="block text-gray-600 text-sm mb-1">Product Price</label>
+
+          <div>
             <input
               type="number"
-              name="productPrice"
-              value={formData.productPrice}
-              onChange={handleInputChange}
-              className="w-full border border-gray-300 rounded-full px-4 py-2 focus:outline-none focus:ring-2 focus:ring-green-500"
+              name="price"
+              placeholder="Product Price"
+              value={formData.price}
+              onChange={handleChange}
+              className="w-full p-3 border border-gray-300 rounded-md"
               required
             />
           </div>
-          
-          {/* Stock */}
-          <div className="mb-4">
-            <label className="block text-gray-600 text-sm mb-1">Stock</label>
+
+          <div>
             <input
               type="number"
               name="stock"
+              placeholder="Stock"
               value={formData.stock}
-              onChange={handleInputChange}
-              className="w-full border border-gray-300 rounded-full px-4 py-2 focus:outline-none focus:ring-2 focus:ring-green-500"
+              onChange={handleChange}
+              className="w-full p-3 border border-gray-300 rounded-md"
               required
             />
           </div>
-          
-          {/* Photos Upload */}
-          <div className="mb-6">
-            <label className="block text-gray-600 text-sm mb-1">Photos</label>
-            <div 
-              className="border border-gray-300 border-dashed rounded-lg p-6 text-center"
-              onDrop={handleDrop}
-              onDragOver={handleDragOver}
-            >
-              <p className="text-gray-500 mb-2">Drag & Drop or</p>
-              <label className="bg-gray-200 hover:bg-gray-300 px-4 py-2 rounded-full cursor-pointer inline-block">
-                + Add up to 3 photos
+
+          <div
+            className={`border-2 border-dashed rounded-md p-6 ${
+              dragActive ? "border-blue-500 bg-blue-50" : "border-gray-300"
+            }`}
+            onDragEnter={handleDrag}
+            onDragLeave={handleDrag}
+            onDragOver={handleDrag}
+            onDrop={handleDrop}
+          >
+            <div className="text-center">
+              <Upload className="mx-auto h-12 w-12 text-gray-400" />
+              <p className="mt-2 text-sm text-gray-500">Drag & Drop or</p>
+              <label className="mt-2 cursor-pointer">
+                <span className="text-blue-500 hover:text-blue-600">+ Add up to 3 photos</span>
                 <input
                   type="file"
-                  multiple
-                  accept="image/*"
-                  onChange={handleFileChange}
                   className="hidden"
+                  accept="image/*"
+                  multiple
+                  onChange={(e) => handleFiles(e.target.files)}
                 />
               </label>
-              
-              {formData.photos.length > 0 && (
-                <div className="mt-4 flex gap-2 justify-center">
-                  {formData.photos.map((photo, index) => (
-                    <div key={index} className="w-16 h-16 relative">
-                      <img
-                        src={URL.createObjectURL(photo)}
-                        alt={`Product photo ${index + 1}`}
-                        className="w-full h-full object-cover rounded"
-                      />
-                    </div>
-                  ))}
-                </div>
-              )}
             </div>
+
+            {formData.photos.length > 0 && (
+              <div className="mt-4 grid grid-cols-3 gap-4">
+                {formData.photos.map((photo, index) => (
+                  <img
+                    key={index}
+                    src={photo || "/placeholder.svg"}
+                    alt={`Product preview ${index + 1}`}
+                    className="h-24 w-24 object-cover rounded-md"
+                  />
+                ))}
+              </div>
+            )}
           </div>
-          
-          {/* Submit Button */}
-          <div className="text-center">
+
+          <div className="flex justify-center space-x-4">
+            <button
+              type="button"
+              onClick={onClose}
+              className="px-6 py-2 border border-gray-400 rounded-md text-gray-700 hover:bg-gray-100 transition"
+            >
+              Cancel
+            </button>
             <button
               type="submit"
-              className="bg-green-800 hover:bg-green-900 text-white font-medium px-8 py-2 rounded-full"
+              className="px-6 py-2 bg-green-700 text-white rounded-md hover:bg-green-800 transition-colors"
             >
               Save and Continue
             </button>
@@ -224,7 +230,7 @@ const AddProductPopup = ({ onClose, onSave }) => {
         </form>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default AddProductPopup;
+export default AddProductPopup
