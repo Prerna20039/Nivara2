@@ -17,7 +17,7 @@ export default function AccountSettings() {
             <h1 className="text-3xl font-bold text-gray-800 mb-2">We are excited to promote your</h1>
             <h2 className="text-3xl font-bold text-gray-800 mb-4">Small Business at</h2>
             <p className="text-3xl font-bold text-amber-500 mb-8">0% listing cost</p>
-            <button  onClick={() => navigate("/sell")} className="bg-[#2c5d1e] hover:bg-[#224718] text-white font-medium py-2 px-8 rounded-full">
+            <button  onClick={() => navigate("/create_account")} className="bg-[#2c5d1e] hover:bg-[#224718] text-white font-medium py-2 px-8 rounded-full">
               Start Selling
             </button>
           </div>

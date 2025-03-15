@@ -93,9 +93,8 @@ export default function App() {
 
         {/* Category Page (When a category is clicked) */}
         <Route path="/category/:categoryName" element={<CategoryPage />} />
-        <Route path="/sell" element={<Create_seller_account />} />
-        <Route path="/settings" element={<div><TopBanner />
-        <div className="mt-9"><Header /></div><AccountSettings /> <Footer /> </div>} />
+        <Route path="/sell" element={<div><TopBanner /> <div className="mt-9"><Header /></div> <AccountSettings /> <Footer/></div>} />
+        <Route path="/create_account" element={<div><Create_seller_account/></div>} />
         <Route path="/shop_register" element={<CreateShop />} />
         <Route path="/seller_dashboard" element={<SellerDashboard />} />
   
