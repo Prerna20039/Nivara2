@@ -17,6 +17,10 @@ import AccountSettings from "./pages/Sell_your_products/page";
 import Create_seller_account from "./pages/Create_seller_account/page";
 import CreateShop from "./pages/shop_registeration/page";
 import SellerDashboard from "./pages/seller_Dashboard/page";
+import AccountSetting from "./pages/settings/account/page";
+import EmailSettings from "./pages/settings/emails/page";
+import ContactPage from "./pages/contact/page";
+import ProductPage from "./pages/Product Detail Page/page";
 
 export default function App() {
   const products = [
@@ -45,7 +49,6 @@ export default function App() {
 
   return (
     <>
-     
 
       <Routes>
         {/* Home Route */}
@@ -85,8 +88,7 @@ export default function App() {
 
         {/* Cart Page */}
         <Route path="/cart" element={<div> <TopBanner />
-          <div className="mt-9"><Header /> <TopBanner />
-      <div className="mt-9"><Header /></div> <EmptyCartPage /> <Footer /> </div></div>} />
+      <div className="mt-9"><Header /></div> <EmptyCartPage /> <Footer /> </div>} />
 
         {/* Shop Categories Page */}
         <Route path="/shop" element={<ShopV />} />
@@ -97,7 +99,10 @@ export default function App() {
         <Route path="/create_account" element={<div><Create_seller_account/></div>} />
         <Route path="/shop_register" element={<CreateShop />} />
         <Route path="/seller_dashboard" element={<SellerDashboard />} />
-  
+        <Route path="/settings/account" element={<div><TopBanner /> <div className="mt-9"><Header /></div><AccountSetting/><Footer/></div>} />
+        <Route path="/settings/emails" element={<div><TopBanner /> <div className="mt-9"><Header /></div><EmailSettings/><Footer/></div>} />
+        <Route path="/contact" element={<div><TopBanner /> <div className="mt-9"><Header /></div><ContactPage/><Footer/></div>} />
+
 
 
       </Routes>

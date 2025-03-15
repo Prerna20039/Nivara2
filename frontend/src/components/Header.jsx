@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import ShopV from "./nav_popup";
 import { LoginPopup } from "./loginpopup";
 import { SignupPopup } from "./signup";
@@ -10,6 +10,7 @@ const Header = () => {
   const [isAccountMenuOpen, setIsAccountMenuOpen] = useState(false);
   const [showLogin, setShowLogin] = useState(false);
   const [showSignup, setShowSignup] = useState(false);
+  const location = useLocation();
 
   const openLogin = () => {
     setShowLogin(true);
@@ -43,6 +44,7 @@ const Header = () => {
             className="searchbox"
             type="text"
             placeholder="What are you looking for?"
+            autoComplete="hidden"
           />
           <i className="fa-solid fa-magnifying-glass searchlogo"></i>
         </div>
@@ -59,16 +61,36 @@ const Header = () => {
       <nav>
         <ul>
           <li>
-            <Link to="/" className="hover:text-gray-300">HOME</Link>
+            <Link
+              to="/"
+              className={`hover:text-gray-300 ${location.pathname === "/" ? "text-[#5D8441] font-bold" : ""}`}
+            >
+              HOME
+            </Link>
           </li>
           <li className="relative">
-            <button onClick={toggleShopV} className="hover:text-gray-300">SHOP V</button>
+            <button
+              onClick={toggleShopV}
+              className={`hover:text-gray-300 ${showShopV ? "text-[#5D8441] font-bold" : ""}`}
+            >
+              SHOP V
+            </button>
           </li>
           <li>
-            <Link to="/contact" className="hover:text-gray-300">CONTACT</Link>
+            <Link
+              to="/contact"
+              className={`hover:text-gray-300 ${location.pathname === "/contact" ? "text-[#5D8441] font-bold" : ""}`}
+            >
+              CONTACT
+            </Link>
           </li>
           <li>
-            <Link to="/about" className="hover:text-gray-300">ABOUT US</Link>
+            <Link
+              to="/about"
+              className={`hover:text-gray-300 ${location.pathname === "/about" ? "text-[#5D8441] font-bold" : ""}`}
+            >
+              ABOUT US
+            </Link>
           </li>
         </ul>
 

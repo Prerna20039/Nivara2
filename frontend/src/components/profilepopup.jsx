@@ -29,7 +29,7 @@ export function AccountMenuPopup({ isOpen, onClose }) {
           <MenuItem iconClass="fa-regular fa-message" label="Messages" href="/messages" />
           <MenuItem iconClass="fa-solid fa-gift" label="Special Offers" href="/offers" />
           <MenuItem iconClass="fa-solid fa-store" label="Sell your Products" href="/sell" />
-          <MenuItem iconClass="fa-solid fa-gear" label="Account Settings" href="/" />
+          <MenuItem iconClass="fa-solid fa-gear" label="Account Settings" href="/settings/account" />
           <hr className="my-1" />
           <MenuItem iconClass="fa-solid fa-right-from-bracket" label="Sign Out" href="/logout" />
         </div>
